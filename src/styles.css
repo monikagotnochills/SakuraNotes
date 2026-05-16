@@ -1,5 +1,6 @@
 :root {
   /* Canvas & Shell */
+  --sidebar-width: clamp(260px, 18vw, 320px);
   --color-shell: rgba(10, 5, 8, 0.88);
   --color-panel: rgba(18, 10, 14, 0.72);
   --color-panel-border: rgba(255, 200, 210, 0.08);
@@ -299,7 +300,7 @@ html, body, #root {
 
 /* Content Area */
 .content-area {
-  margin-left: 260px;
+  margin-left: var(--sidebar-width);
   min-height: 100vh;
   background: rgba(8, 4, 6, 0.60);
   backdrop-filter: blur(8px);
@@ -309,13 +310,13 @@ html, body, #root {
 }
 
 .content-container {
-  max-width: 820px;
+  max-width: clamp(680px, 60vw, 1200px);
   margin: 0 auto;
   width: 100%;
 }
 
 .content-area.zen {
-  max-width: 680px;
+  max-width: clamp(680px, 50vw, 900px);
   margin-left: auto;
   margin-right: auto;
 }
