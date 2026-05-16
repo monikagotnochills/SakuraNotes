@@ -126,7 +126,8 @@ export default function Editor({ note, onChange, onDelete, onTogglePin }) {
         e.preventDefault();
         const blob = imageItem.getAsFile();
         const dataUrl = await blobToDataUrl(blob);
-        insertAtCursor(`\n![image](${dataUrl})\n`);
+        const newAttachments = [...(localNote.attachments || []), dataUrl];
+        markUnsaved({ ...localNote, attachments: newAttachments });
     };
 
     const insertAtCursor = (text) => {
@@ -164,17 +165,29 @@ export default function Editor({ note, onChange, onDelete, onTogglePin }) {
         }, 0);
     };
 
-    // Extract images for preview strip
+    // Extract legacy inline images and combine with attachments
     const extractImages = (content) => {
         const regex = /!\[.*?\]\((data:image\/.*?;base64,.*?)\)/g;
         const matches = [];
         let match;
-        while ((match = regex.exec(content)) !== null) {
+        while ((match = regex.exec(content || "")) !== null) {
             matches.push(match[1]);
         }
         return matches;
     };
-    const images = extractImages(localNote.content || "");
+    const images = [...extractImages(localNote.content), ...(localNote.attachments || [])];
+
+    const removeAttachment = (index) => {
+        const legacyCount = extractImages(localNote.content).length;
+        if (index < legacyCount) {
+            alert("To remove this legacy image, delete the markdown text in the editor.");
+            return;
+        }
+        const attachIndex = index - legacyCount;
+        const newAttachments = [...(localNote.attachments || [])];
+        newAttachments.splice(attachIndex, 1);
+        markUnsaved({ ...localNote, attachments: newAttachments });
+    };
 
     return (
         <div className="content-container">
@@ -219,12 +232,26 @@ export default function Editor({ note, onChange, onDelete, onTogglePin }) {
                 textareaRef={textareaRef} 
                 onInsert={insertAtCursor} 
                 onWrap={wrapAtCursor} 
+                onAddAttachment={(dataUrl) => {
+                    const newAttachments = [...(localNote.attachments || []), dataUrl];
+                    markUnsaved({ ...localNote, attachments: newAttachments });
+                }}
             />
 
             {images.length > 0 && (
                 <div className="image-preview-strip">
                     {images.map((src, i) => (
-                        <img key={i} src={src} className="image-thumb" title="Attached Image" alt="thumb" />
+                        <div key={i} style={{ position: 'relative', display: 'inline-block' }}>
+                            <img src={src} className="image-thumb" title="Attached Image" alt="thumb" />
+                            <button 
+                                className="btn-icon" 
+                                style={{ position: 'absolute', top: -8, right: -8, background: 'rgba(255,0,0,0.8)', color: 'white', padding: '2px', width: '20px', height: '20px', fontSize: '10px' }}
+                                onClick={() => removeAttachment(i)}
+                                title="Remove Image"
+                            >
+                                ✕
+                            </button>
+                        </div>
                     ))}
                 </div>
             )}

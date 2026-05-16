@@ -5,6 +5,7 @@ export default function FormattingToolbar({
     textareaRef, 
     onInsert, // function(textToInsert, cursorOffset)
     onWrap, // function(prefix, suffix)
+    onAddAttachment,
     showPreviewToggle, 
     isPreview, 
     onTogglePreview 
@@ -30,7 +31,11 @@ export default function FormattingToolbar({
         if (!file) return;
         const reader = new FileReader();
         reader.onload = (ev) => {
-            onInsert(`\n![${file.name}](${ev.target.result})\n`);
+            if (onAddAttachment) {
+                onAddAttachment(ev.target.result);
+            } else {
+                onInsert(`\n![${file.name}](${ev.target.result})\n`);
+            }
         };
         reader.readAsDataURL(file);
         e.target.value = ''; // reset
