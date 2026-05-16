@@ -1,83 +1,76 @@
-<div align="center">
-  <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Travel%20and%20places/Cherry%20Blossom.png" alt="Cherry Blossom" width="100" />
+# 🌸 Sakura Notes
 
-  <h1>桜 SAKURA NOTES</h1>
-  <p><strong>A cinematic, highly aesthetic, and immersive markdown note-taking experience inspired by Studio Ghibli and retro Japanese pixel art.</strong></p>
+## 📖 The Story
 
-  <p>
-    <img src="https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react" alt="React" />
-    <img src="https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E" alt="Vite" />
-    <img src="https://img.shields.io/badge/Vanilla_CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS" />
-    <img src="https://img.shields.io/badge/Local_Storage-Persistence-success?style=for-the-badge" alt="Local Storage" />
-  </p>
-</div>
+I was honestly just so incredibly bored with the current ecosystem of note-taking web apps. Everywhere you look, it's the same sterile, minimalist, boring black-and-white grids. I wanted something that actually feels *good* to use—something atmospheric, cinematic, and peaceful. 
+
+So, I built **Sakura Notes**. 
+
+Sakura Notes is a highly aesthetic, Japanese pixel-art inspired hybrid Markdown editor. It's designed to be a calming, immersive environment where you can actually enjoy the process of writing, complete with falling sakura petals, customizable lighting, and integrated lo-fi music.
 
 ---
 
-## 🎐 The Vibe
-Sakura Notes is not just a tool; it's a digital sanctuary. Built entirely with Vanilla CSS glassmorphism, dynamic React components, and a custom HTML5 particle canvas, it provides a deeply immersive, distraction-free environment for your thoughts, wikis, and poetry.
+## ✨ Features
 
-<br />
-
-## ✨ Premium Features
-
-### 🌸 **Immersive Canvas & Glassmorphism UI**
-- A dynamic, physics-based cherry blossom particle system reacting to the wind in the background.
-- Adjustable petal density slider.
-- High-fidelity **Glassmorphism panels** mimicking frosted glass with cinematic text shadows.
-- **Granular Lighting Controls:** Tweak Blur, Panel Opacity, Saturation, Border Glow, and Brightness globally in real-time.
-
-### 📝 **Distraction-Free Markdown Editor**
-- Instant, sub-second markdown editing with an inline floating formatting toolbar.
-- **Haiku Mode:** Built-in syllable counter specifically for writing poetry. 
-- Auto-save state machine with satisfying micro-animations and "Unsaved" state indication.
-
-### 📚 **Wiki & Manual Builder**
-- A completely distinct workspace for building nested documentation.
-- **Drag & Drop API:** Seamlessly reorder sections and manual pages.
-- Auto-generating **Table of Contents** based on your markdown headings.
-- Toggle between raw Edit and live Markdown Preview.
-- 1-click **Export to Markdown**.
-
-### 🖼️ **Seamless Media Integration**
-- **Inline Emoji Picker:** Custom floating panel categorized by Faces, Nature, Objects, and Symbols.
-- **Image Support:** Paste directly from your clipboard or upload files to embed Base64 images directly into your markdown. Includes an automatic inline image preview strip.
-
-### 🎵 **Built-in Music Player & Immersive Mode**
-- Integrated lo-fi/instrumental background music player with full volume and playback controls housed in a glass UI panel.
-- **Full Immersive Mode:** Click the round pink toggle to fade away the entire user interface, leaving only your music, the falling cherry blossoms, and your thoughts.
+- **Immersive Zen Mode**: Hide the UI and write distraction-free with falling sakura petals in the background.
+- **Glassmorphism UI**: A stunning, frosted-glass design system that feels premium and responsive.
+- **Dynamic Lighting Panel**: Adjust screen brightness and petal density on the fly without leaving the editor.
+- **Rich Markdown Editor**: Write in markdown with an intuitive formatting toolbar, image attachments, and word count/read time metrics.
+- **Haiku Mode**: A fun, built-in syllable counter to help you write perfect 5-7-5 haikus.
+- **Note Locking & Encryption**: Secure your most private thoughts using Web Crypto API AES-GCM encryption.
+- **Integrated Lo-Fi Player**: Built-in background music player with volume control and auto-play to keep you in the zone.
 
 ---
 
-## 🛠️ Setup & Installation
+## 🛠 Tech Stack
 
-Getting Sakura Notes running locally takes less than a minute.
+Sakura Notes is built from the ground up to be blazing fast, client-side only, and visually stunning.
 
-```bash
-# Clone the repository
-git clone https://github.com/your-username/SakuraNotes.git
+### Core Architecture
+- **React 18** - Component-based UI architecture.
+- **Vite & Node.js** - Lightning-fast frontend build tooling and local development environment.
+- **HTML5 Canvas** - Used for the highly optimized, custom falling sakura petal physics engine.
+- **Web Crypto API** - Native browser cryptography for secure, zero-knowledge note locking.
 
-# Navigate into the directory
-cd SakuraNotes
+### UI & Aesthetics
+- **Pure Custom CSS** - No Tailwind or bulky UI libraries. Completely bespoke CSS featuring fluid typography (`clamp`), dynamic viewport units (`100dvh` for flawless mobile rendering), and advanced CSS variables for theme management.
+- **Glassmorphism Design System** - Utilizing `backdrop-filter: blur()` and layered transparency for a deep, cinematic aesthetic.
 
-# Install the dependencies
-npm install
-
-# Start the magical development server
-npm run dev
-```
-
-Visit `http://localhost:5173` to enter the sanctuary.
+### Data & State
+- **React Hooks** - Deeply integrated `useState`, `useEffect`, and `useMemo` for rapid state updates.
+- **Local Storage API** - 100% client-side data persistence. Your notes never touch a server and belong entirely to you.
 
 ---
 
-## 🎨 Design Tokens & Typography
-- **Primary Display:** *Shippori Mincho* (for elegant, traditional headings)
-- **UI & Code:** *DM Mono* (for brutalist, precise interface elements)
-- **Palette:** A carefully curated pastel spectrum of blush pinks (`#e8547a`, `#ffb4cd`), deep charcoal inks (`#1a0f14`), and pure glass transparency.
+## 🚀 Getting Started
+
+If you want to run this beautifully calming environment locally:
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/monikagotnochills/SakuraNotes.git
+   cd SakuraNotes
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open in browser:**
+   Navigate to `http://localhost:5173` to start writing in peace.
 
 ---
 
-<div align="center">
-  <p><i>"Like cherry blossoms, thoughts are beautiful but fleeting. Capture them."</i></p>
-</div>
+## 📱 Mobile Responsive
+
+Sakura Notes was explicitly engineered to look flawless on mobile devices. It utilizes dynamic viewport units (`dvh`) to bypass intrusive mobile browser address bars, ensuring that the editor and lighting panels always fit your screen perfectly.
+
+---
+
+*Made to cure the boredom of modern web apps.* 🌸
