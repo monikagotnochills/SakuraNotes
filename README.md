@@ -1,4 +1,5 @@
 # 🌸 Sakura Notes
+https://sakura-notes.vercel.app/
 
 ## 📖 The Story
 
