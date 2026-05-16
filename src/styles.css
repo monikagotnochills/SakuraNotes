@@ -345,6 +345,7 @@ html, body, #root {
 
 .editor-metadata {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-4);
   align-items: center;
   font-family: var(--font-ui);

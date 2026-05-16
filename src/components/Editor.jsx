@@ -180,7 +180,16 @@ export default function Editor({ note, onChange, onDelete, onTogglePin }) {
     const removeAttachment = (index) => {
         const legacyCount = extractImages(localNote.content).length;
         if (index < legacyCount) {
-            alert("To remove this legacy image, delete the markdown text in the editor.");
+            let matchIndex = 0;
+            const newContent = (localNote.content || "").replace(/!\[.*?\]\((data:image\/.*?;base64,.*?)\)/g, (match) => {
+                if (matchIndex === index) {
+                    matchIndex++;
+                    return ""; // Remove the legacy image markdown!
+                }
+                matchIndex++;
+                return match;
+            });
+            markUnsaved({ ...localNote, content: newContent });
             return;
         }
         const attachIndex = index - legacyCount;
