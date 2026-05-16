@@ -15,8 +15,8 @@ export default function MusicPlayer() {
     const containerRef = useRef(null);
 
     useEffect(() => {
-        // Look for music.mp4 in the public folder
-        audioRef.current = new Audio('/music.mp4');
+        // Look for music.mp3 in the public folder
+        audioRef.current = new Audio('/music.mp3');
         audioRef.current.loop = true;
         audioRef.current.preload = 'metadata';
         audioRef.current.volume = volume;
