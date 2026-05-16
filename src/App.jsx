@@ -59,8 +59,16 @@ export default function App() {
     const [activeTab, setActiveTab] = useState("NOTES");
     const [zenMode, setZenMode] = useState(false);
     const [quickCaptureOpen, setQuickCaptureOpen] = useState(false);
-    const [immersiveMode, setImmersiveMode] = useState(false);
-    const [showImmersiveOverlay, setShowImmersiveOverlay] = useState(false);
+    const [immersiveMode, setImmersiveMode] = useState(true);
+    const [showImmersiveOverlay, setShowImmersiveOverlay] = useState(true);
+    const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
+    useEffect(() => {
+        // Ensure immersive state is set on the DOM immediately upon first load
+        if (immersiveMode) {
+            document.body.setAttribute('data-immersive', 'true');
+        }
+    }, []);
 
     const toggleImmersive = () => {
         if (!immersiveMode) {
@@ -121,6 +129,7 @@ export default function App() {
         setNotes((s) => [n, ...s]);
         setSelectedId(n.id);
         if (zenMode) setZenMode(false);
+        if (mobileSidebarOpen) setMobileSidebarOpen(false);
     }
 
     function updateNote(updated) {
@@ -152,6 +161,7 @@ export default function App() {
             )
         }));
         setSelectedManualId(page.id);
+        if (mobileSidebarOpen) setMobileSidebarOpen(false);
     }
 
     function updateManualPage(updatedPage) {
@@ -226,10 +236,17 @@ export default function App() {
             )}
 
             <div className={`ui-layer ${zenMode ? "zen" : ""} ${immersiveMode ? "immersive-active" : ""}`}>
+                {/* Mobile overlay */}
+                <div 
+                    className={`mobile-overlay ${mobileSidebarOpen ? 'active' : ''}`} 
+                    onClick={() => setMobileSidebarOpen(false)}
+                />
+
                 <Sidebar
+                    isOpen={mobileSidebarOpen}
                     notes={notes}
                     selectedId={selectedId}
-                    onSelect={(id) => setSelectedId(id)}
+                    onSelect={(id) => { setSelectedId(id); setMobileSidebarOpen(false); }}
                     onCreate={createNote}
                     onDelete={removeNote}
                     petalCount={petalCount}
@@ -240,7 +257,7 @@ export default function App() {
                     onTabChange={setActiveTab}
                     manualSections={manual.sections}
                     selectedManualId={selectedManualId}
-                    onManualSelect={setSelectedManualId}
+                    onManualSelect={(id) => { setSelectedManualId(id); setMobileSidebarOpen(false); }}
                     onCreateManualSection={createManualSection}
                     onCreateManualPage={createManualPage}
                     onDragEnd={handleDragEnd}
@@ -249,6 +266,14 @@ export default function App() {
                 />
 
                 <main className={`content-area ${zenMode ? "zen" : ""}`}>
+                    <button className="mobile-menu-btn" onClick={() => setMobileSidebarOpen(true)}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+
                     {activeTab === "NOTES" ? (
                         <Editor
                             note={selectedNote}
