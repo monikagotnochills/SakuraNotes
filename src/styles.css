@@ -569,15 +569,15 @@ html, body, #root {
 }
 
 .empty-state-icon {
-  font-size: 48px;
-  color: var(--sakura-400);
+  font-size: 72px;
+  color: var(--sakura-500);
   font-family: var(--font-display);
 }
 
 .empty-state-title {
   font-family: var(--font-display);
-  font-size: 24px;
-  color: var(--ink-secondary);
+  font-size: 32px;
+  color: var(--ink-primary);
 }
 
 .empty-state-hints {
@@ -586,13 +586,33 @@ html, body, #root {
   margin-top: var(--space-4);
 }
 
+.kbd-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--ink-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.kbd-btn:hover {
+  background: rgba(255,200,215,0.1);
+  color: var(--sakura-500);
+}
+
 .kbd-pill {
   background: rgba(255,200,215,0.08);
   border: 1px solid rgba(255,200,215,0.12);
   border-radius: var(--radius-md);
   padding: 2px 8px;
   font-family: var(--font-ui);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--ink-secondary);
 }
 
@@ -1068,9 +1088,9 @@ html, body, #root {
 
 .immersive-kanji {
   font-family: var(--font-display);
-  font-size: 72px;
+  font-size: 96px;
   font-weight: 400;
-  color: var(--sakura-300);
+  color: var(--sakura-500);
   line-height: 1;
   animation: immersivePulse 3.5s ease-in-out infinite;
 }
@@ -1082,17 +1102,17 @@ html, body, #root {
 
 .immersive-name {
   font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: 400;
-  color: rgba(255, 240, 243, 0.92);
+  font-size: 32px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
   letter-spacing: 0.22em;
 }
 
 .immersive-hint {
   font-family: var(--font-ui);
-  font-size: 11px;
+  font-size: 16px;
   letter-spacing: 0.14em;
-  color: rgba(255, 200, 215, 0.40);
+  color: rgba(255, 255, 255, 0.7);
   margin-top: 20px;
   animation: immersiveFadeIn 500ms 1000ms both;
 }

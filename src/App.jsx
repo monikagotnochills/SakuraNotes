@@ -287,6 +287,12 @@ export default function App() {
                                     return s.map((n) => (n.id === id ? { ...n, pinned: !n.pinned } : n));
                                 });
                             }}
+                            onCreate={createNote}
+                            onSearchFocus={() => {
+                                setMobileSidebarOpen(true);
+                                setTimeout(() => document.querySelector('.search-bar input')?.focus(), 100);
+                            }}
+                            onToggleZenMode={() => setZenMode(!zenMode)}
                         />
                     ) : (
                         <Manual 

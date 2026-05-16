@@ -10,7 +10,7 @@ function blobToDataUrl(blob) {
     });
 }
 
-export default function Editor({ note, onChange, onDelete, onTogglePin }) {
+export default function Editor({ note, onChange, onDelete, onTogglePin, onCreate, onSearchFocus, onToggleZenMode }) {
     const [haikuMode, setHaikuMode] = useState(false);
     
     // Local state for auto-save logic
@@ -45,9 +45,15 @@ export default function Editor({ note, onChange, onDelete, onTogglePin }) {
                 <div className="empty-state-title">SAKURA NOTES</div>
                 <div style={{ color: 'var(--ink-secondary)', fontSize: '15px' }}>Select a note or create one.</div>
                 <div className="empty-state-hints">
-                    <span className="kbd-pill">N</span> New Note
-                    <span className="kbd-pill">/</span> Search
-                    <span className="kbd-pill">Z</span> Zen Mode
+                    <button className="kbd-btn" onClick={onCreate}>
+                        <span className="kbd-pill">Ctrl+N</span> New Note
+                    </button>
+                    <button className="kbd-btn" onClick={onSearchFocus}>
+                        <span className="kbd-pill">/</span> Search
+                    </button>
+                    <button className="kbd-btn" onClick={onToggleZenMode}>
+                        <span className="kbd-pill">Ctrl+Shift+Z</span> Zen Mode
+                    </button>
                 </div>
             </div>
         );
