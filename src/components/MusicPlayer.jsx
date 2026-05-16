@@ -31,6 +31,28 @@ export default function MusicPlayer() {
         };
     }, []);
 
+    // Global one-click autoplay listener
+    useEffect(() => {
+        const startAudio = () => {
+            if (audioRef.current && audioRef.current.paused && !muted) {
+                audioRef.current.play()
+                    .then(() => setPlaying(true))
+                    .catch(e => console.error("Autoplay prevented", e));
+            }
+            // Remove listener after first interaction
+            document.removeEventListener('click', startAudio);
+            document.removeEventListener('touchstart', startAudio);
+        };
+
+        document.addEventListener('click', startAudio);
+        document.addEventListener('touchstart', startAudio);
+
+        return () => {
+            document.removeEventListener('click', startAudio);
+            document.removeEventListener('touchstart', startAudio);
+        };
+    }, [muted]);
+
     // Sync volume to audio element
     useEffect(() => {
         if (audioRef.current) {
