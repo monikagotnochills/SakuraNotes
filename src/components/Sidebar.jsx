@@ -4,6 +4,7 @@ import LightingPanel from "./LightingPanel";
 
 export default function Sidebar({ 
     isOpen,
+    showLighting, setShowLighting,
     notes, selectedId, onSelect, onCreate, onDelete, 
     petalCount, setPetalCount, theme, setTheme,
     activeTab, onTabChange,
@@ -12,7 +13,6 @@ export default function Sidebar({
     immersiveMode, onToggleImmersive
 }) {
     const [filter, setFilter] = useState("");
-    const [showLighting, setShowLighting] = useState(false);
 
     const filtered = useMemo(() => {
         const q = filter.trim().toLowerCase();
@@ -45,8 +45,16 @@ export default function Sidebar({
 
     return (
         <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
-            <div className="sidebar-header">
+            <div className="sidebar-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h1 className="brand">桜 SAKURA NOTES</h1>
+                <button 
+                    className="btn-icon" 
+                    title={activeTab === 'NOTES' ? "New Note" : "New Page"} 
+                    onClick={activeTab === 'NOTES' ? onCreate : () => onCreateManualPage()}
+                    style={{ background: 'var(--sakura-500)', color: '#fff', width: '28px', height: '28px', fontSize: '18px', padding: 0, border: 'none', borderRadius: 'var(--radius-sm)' }}
+                >
+                    +
+                </button>
             </div>
 
             <div className="search-bar">

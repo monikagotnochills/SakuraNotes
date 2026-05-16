@@ -62,6 +62,7 @@ export default function App() {
     const [immersiveMode, setImmersiveMode] = useState(true);
     const [showImmersiveOverlay, setShowImmersiveOverlay] = useState(true);
     const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+    const [showLighting, setShowLighting] = useState(false);
 
     useEffect(() => {
         // Ensure immersive state is set on the DOM immediately upon first load
@@ -244,6 +245,8 @@ export default function App() {
 
                 <Sidebar
                     isOpen={mobileSidebarOpen}
+                    showLighting={showLighting}
+                    setShowLighting={setShowLighting}
                     notes={notes}
                     selectedId={selectedId}
                     onSelect={(id) => { setSelectedId(id); setMobileSidebarOpen(false); }}
@@ -265,7 +268,7 @@ export default function App() {
                     onToggleImmersive={toggleImmersive}
                 />
 
-                <main className={`content-area ${zenMode ? "zen" : ""}`}>
+                <main className={`content-area ${zenMode ? "zen" : ""}`} onClick={() => showLighting && setShowLighting(false)}>
                     <button className="mobile-menu-btn" onClick={() => setMobileSidebarOpen(true)}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <line x1="3" y1="12" x2="21" y2="12"></line>
