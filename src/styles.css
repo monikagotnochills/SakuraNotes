@@ -149,7 +149,7 @@ html, body, #root {
 
 /* Sidebar */
 .sidebar {
-  width: 260px;
+  width: var(--sidebar-width);
   height: 100vh;
   position: fixed;
   left: 0; top: 0;
@@ -165,7 +165,7 @@ html, body, #root {
 }
 
 .sidebar.collapsed {
-  transform: translateX(-260px);
+  transform: translateX(calc(-1 * var(--sidebar-width)));
 }
 
 .sidebar-header {
@@ -328,7 +328,7 @@ html, body, #root {
 
 .note-title-input {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: clamp(24px, 4vw, 42px);
   font-weight: 400;
   color: var(--ink-primary);
   background: transparent;
@@ -1366,4 +1366,152 @@ html, body, #root {
   border: 1px solid rgba(232, 84, 122, 0.2);
   border-radius: var(--radius-pill);
   padding: 2px 9px;
+}
+
+/* ---------------------------------
+   MOBILE RESPONSIVENESS
+--------------------------------- */
+.mobile-menu-btn {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 900;
+  background: var(--color-panel);
+  border: 1px solid var(--color-panel-border);
+  color: var(--sakura-300);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 950;
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.mobile-overlay.active {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
+  
+  .sidebar {
+    transform: translateX(calc(-1 * var(--sidebar-width)));
+    z-index: 1000;
+    box-shadow: 4px 0 40px rgba(0, 0, 0, 0.8) !important;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0) !important;
+  }
+
+  .content-area {
+    margin-left: 0;
+    padding: clamp(64px, 10vh, 72px) 16px 24px 16px; /* Top padding clears mobile menu and music btn */
+  }
+
+  .editor-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .editor-meta {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .formatting-toolbar {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .music-panel {
+    width: calc(100vw - 40px);
+    right: 20px;
+    top: 72px;
+  }
+
+  .emoji-picker-panel {
+    width: calc(100vw - 32px);
+    left: 16px;
+    right: 16px;
+    top: auto;
+    bottom: 80px; /* Instead of inline, position relative to bottom to prevent cutoff */
+    position: fixed;
+  }
+
+  .emoji-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .quick-capture-panel {
+    width: 90vw;
+    left: 5vw;
+    transform: translateX(0);
+  }
+
+  .lighting-panel {
+    left: 10px;
+    bottom: 70px;
+    width: calc(100vw - 20px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .sidebar {
+    width: clamp(300px, 20vw, 400px);
+  }
+  .content-area {
+    padding: clamp(64px, 8vh, 96px) clamp(64px, 10vw, 120px);
+  }
+  .content-container {
+    max-width: 1200px;
+  }
+  .content-area.zen {
+    max-width: 900px;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .content-area {
+    padding: clamp(32px, 5vh, 48px) clamp(32px, 4vw, 48px);
+  }
+}
+
+@media (max-width: 480px) {
+  .emoji-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .formatting-toolbar button {
+    padding: 6px 8px; /* Slightly tighter padding for very small screens */
+  }
+  .mobile-overlay {
+    backdrop-filter: blur(4px); /* Stronger blur on small phones for focus */
+  }
+}
+
+/* Fix overlapping when Immersive Overlay active */
+.ui-layer.immersive-active .mobile-menu-btn {
+  opacity: 0;
+  pointer-events: none;
 }

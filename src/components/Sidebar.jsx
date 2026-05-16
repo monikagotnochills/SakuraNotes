@@ -3,6 +3,7 @@ import NoteCard from "./NoteCard";
 import LightingPanel from "./LightingPanel";
 
 export default function Sidebar({ 
+    isOpen,
     notes, selectedId, onSelect, onCreate, onDelete, 
     petalCount, setPetalCount, theme, setTheme,
     activeTab, onTabChange,
@@ -43,7 +44,7 @@ export default function Sidebar({
     const [isAddingSection, setIsAddingSection] = useState(false);
 
     return (
-        <aside className="sidebar">
+        <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
             <div className="sidebar-header">
                 <h1 className="brand">桜 SAKURA NOTES</h1>
             </div>
